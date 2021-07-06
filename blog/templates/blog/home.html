@@ -7,6 +7,12 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>This is business</h1>
+    
+    {% for post in feed %}
+        <p>{{post.title}}</p>
+        <p>{{post.author}}</p>
+        <p>{{post.snippet}}</p>
+    {% endfor %}
+        
 </body>
 </html>
