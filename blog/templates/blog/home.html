@@ -3,6 +3,13 @@
     
     {% block content %}
     {% include 'blog/navbar.html' %} 
+
+    <style>
+      .post-container{
+        margin-left: 10%;
+        margin-top: 10px;
+      }
+    </style>
     
     <div class="post-container">
         
@@ -11,13 +18,13 @@
     
     
             <div style="border: white 1px solid;">
-                <div class="card" style="width: 100%;">
+                <div class="card" style="width: 90%;">
                     <img src="{{post.feauture_pic.url}}" class="card-img-top" alt="...">
                     <div class="card-body">
                       <h5 class="card-title">{{post.title}}</h5>
                       <h6 class="card-subtitle">{{post.author}} | {{post.created_on}}</h6>
                       <p class="card-text">{{post.snippet}}</p>
-                      <a href="{% url 'post_detail' post.title|slugify %}" class="btn btn-primary">Read More</a>
+                      <a href="{% url 'post-detail' post.id %}" class="btn btn-primary">Read More</a>
                     {% for tag in post.tag.all %}
                     <span>
                     <a style="float: right; margin: 10px;" href="" class="btn btn-outline-success disabled"> {{tag}} </a>

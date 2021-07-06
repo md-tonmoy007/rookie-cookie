@@ -14,7 +14,7 @@ def Home_as_view(request):
 
 
 def PostDetail_as_view(request, pk):
-    post = Post.objects.get(title=pk.replace('-',' '))
+    post = Post.objects.get(id=pk)
     categories = Categories.objects.all()
     return render(request, 'blog/post_detail.html', context={
         'post' : post,
