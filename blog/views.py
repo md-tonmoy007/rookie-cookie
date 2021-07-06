@@ -15,20 +15,27 @@ def Home_as_view(request):
 
 def PostDetail_as_view(request, pk):
     post = Post.objects.get(title=pk.replace('-',' '))
-
+    categories = Categories.objects.all()
     return render(request, 'blog/post_detail.html', context={
         'post' : post,
+        'categories': categories,
     })
 
 def About_as_view(request):
-    return render(request, 'blog/about.html')
+    categories = Categories.objects.all()
+    return render(request, 'blog/about.html', context={
+        'categories': categories,
+    })
 
 def Search(request):
+    
 	if request.method == 'GET':
 		search = request.GET.get('search-text')
 		titles = Post.objects.filter(title__contains = search)
 		contents = Post.objects.filter(content__contains = search)
 
+    
 
-	context = {'titles':titles, 'contents':contents}
+
+	context = {'titles':titles, 'contents':contents, 'categories':categories}
 	return render(request, 'blog/search.html',context)
