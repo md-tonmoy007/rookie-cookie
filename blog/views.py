@@ -6,6 +6,29 @@ from .models import *
 
 def Home_as_view(request):
     queryset = Post.objects.filter(status=1).order_by('-created_on')
+    categories = Categories.objects.all()
     return render(request, 'blog/home.html', context={
         'feed':queryset,
+        'categories': categories,
     })
+
+
+def PostDetail_as_view(request, pk):
+    post = Post.objects.get(title=pk.replace('-',' '))
+
+    return render(request, 'blog/post_detail.html', context={
+        'post' : post,
+    })
+
+def About_as_view(request):
+    return render(request, 'blog/about.html')
+
+def Search(request):
+	if request.method == 'GET':
+		search = request.GET.get('search-text')
+		titles = Post.objects.filter(title__contains = search)
+		contents = Post.objects.filter(content__contains = search)
+
+
+	context = {'titles':titles, 'contents':contents}
+	return render(request, 'blog/search.html',context)

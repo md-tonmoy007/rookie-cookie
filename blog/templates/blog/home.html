@@ -1,18 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+{% extends 'blog/base.html' %}
+
     
-    {% for post in feed %}
-        <p>{{post.title}}</p>
-        <p>{{post.author}}</p>
-        <p>{{post.snippet}}</p>
-    {% endfor %}
+    {% block content %}
+    {% include 'blog/navbar.html' %} 
+    
+    <div class="post-container">
         
-</body>
-</html>
+            
+            {% for post in feed %}
+    
+    
+            <div style="border: white 1px solid;">
+                <div class="card" style="width: 100%;">
+                    <img src="{{post.feauture_pic.url}}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title">{{post.title}}</h5>
+                      <h6 class="card-subtitle">{{post.author}} | {{post.created_on}}</h6>
+                      <p class="card-text">{{post.snippet}}</p>
+                      <a href="{% url 'post_detail' post.title|slugify %}" class="btn btn-primary">Read More</a>
+                    {% for tag in post.tag.all %}
+                    <span>
+                    <a style="float: right; margin: 10px;" href="" class="btn btn-outline-success disabled"> {{tag}} </a>
+                    {%endfor%}
+                    </div>
+                  </div>
+            </div>
+                {% endfor %}
+                
+        
+    {% endblock content %}
+        
+
+
+        
+
+

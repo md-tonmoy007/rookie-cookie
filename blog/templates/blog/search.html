@@ -1,0 +1,58 @@
+{% extends 'blog/base.html' %}
+
+
+{% block content %}
+{% include 'blog/navbar.html' %}
+    
+  
+
+<div class="post-container">
+    
+        
+
+        <div style="border: white 1px solid;">
+            <h1>Based On Title</h1>
+            {% for title in titles %} 
+            <div class="card" style="width: 100%;">
+                <div class="card-body">
+                  <h5 class="card-title">{{title.title}}</h5>
+                  <h6 class="card-subtitle">{{title.author}} | {{title.created_on}}</h6>
+                  <p class="card-text">{{title.snippet}}</p>
+                  <a href="{% url 'post_detail' title.title|slugify %}" class="btn btn-primary">Read More</a>
+              </div>
+        </div>
+        {%empty%}
+        <div style="border: white 1px solid;">
+            <div class="card" style="width: 100%;">
+                <div class="card-body">
+                  <h5 class="card-title">found nothing</h5>
+        </div>
+        {% endfor %}
+
+        <hr>
+         
+        <div style="border: white 1px solid;">
+            <h1>Based On content</h1>
+            {% for title in contents %}
+            <div class="card" style="width: 100%;">
+                <div class="card-body">
+                  <h5 class="card-title">{{title.title}}</h5>
+                  <h6 class="card-subtitle">{{title.author}} | {{title.created_on}}</h6>
+                  <p class="card-text">{{title.snippet}}</p>
+                  <a href="{% url 'post_detail' title.title|slugify %}" class="btn btn-primary">Read More</a>
+              </div>
+        </div>
+        {%empty%}
+        <div style="border: white 1px solid;">
+            <div class="card" style="width: 100%;">
+                <div class="card-body">
+                  <h5 class="card-title">found nothing</h5>
+        </div>
+        {% endfor %}
+    
+            
+
+</div>
+
+
+{% endblock content %}
