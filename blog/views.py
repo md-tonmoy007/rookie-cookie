@@ -37,5 +37,5 @@ def Search(request):
     
 
 
-	context = {'titles':titles, 'contents':contents, 'categories':categories}
+	context = {'titles':titles, 'contents':contents}
 	return render(request, 'blog/search.html',context)
